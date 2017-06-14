@@ -2,6 +2,12 @@ var PackageInstaller = function (pkg) {
   'use strict'
 
    var _pkg = pkg;   
+   pkg.forEach(function(val) {
+      if (typeof val !== 'string') {
+        throw 'Wrong items type..expected an array of type string'
+      }
+   });
+    
 
     /**
    * Topological sorting algorithm
