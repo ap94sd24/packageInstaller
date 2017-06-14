@@ -1,7 +1,7 @@
-<html>
+ <html>
   <head>
     <title> Package Installer</title>
-    <link rel="stylesheet" href="node_module/jasmine-core/lib/jasmine-core/jasmine.css">
+    <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
      <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
 	 <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
 	 <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
@@ -9,8 +9,8 @@
   <body>
     <script type = "text/javascript" src="src/pkgInstaller.js"></script>
     <script> 
-      var pkgInstaller = new packageInstaller(['a:','b:a']); 
-      var results = packageInstaller.install(); 
+      var pkgInstaller = new PackageInstaller(['a:','b:a']); 
+      var results = pkgInstaller.build(); 
     </script>
     <script type = "text/javascript" src="specs/pkgInstallerSpecs.js"></script>
   </body>
