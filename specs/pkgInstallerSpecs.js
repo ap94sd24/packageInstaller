@@ -20,5 +20,21 @@
         ]; 
         expect(new PackageInstaller(input).build()).toEqual('KittenService, Ice, Cyberportal, Leetmeme, CamelCaser, Fraudstream');  
       });
-   })
+   });
+
+   describe('fails with:', function() {
+     it('A string', function() {
+     	expect(function() {
+     	  new PackageInstaller('x'); }).toThrow(); 
+     });
+     it('A number', function() {
+     	expect(function() {
+     	  new PackageInstaller('5'); }).toThrow(); 
+     });
+     
+    it('An object', function() {
+      expect(function() { new PackageInstaller({ x:'y' }); }).toThrow();
+    });
+      
+   });
  });
