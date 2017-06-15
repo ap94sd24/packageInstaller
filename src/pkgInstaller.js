@@ -2,12 +2,17 @@ var PackageInstaller = function (pkg) {
   'use strict'
 
    var _pkg = pkg;   
+
+  
    pkg.forEach(function(val) {
       if (typeof val !== 'string') {
         throw 'Wrong items type..expected an array of type string'
       }
    });
+   if (!Array.isArray(pkg))
+    throw 'expected array of packages';
     
+
 
     /**
    * Topological sorting algorithm
@@ -30,6 +35,7 @@ var PackageInstaller = function (pkg) {
       parents.push(parsedPkg);
       var pkg_val = parsePkgToObj[parsedPkg];
       pkg_val.forEach(function(dependency) {
+        
         
         sortPkg(dependency, parents);
       });
