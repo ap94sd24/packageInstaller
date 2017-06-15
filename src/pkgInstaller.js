@@ -1,13 +1,14 @@
  var PackageInstaller = function (pkg) {
   'use strict'
+  
+   //Validates inputs of type strings array
+   if (!Array.isArray(pkg)) {
+     throw 'expected array of packages';
+   }
 
-    
-  if (pkg === null || pkg === undefined) {
-    throw 'package needed!'; 
-  }
-
-   if (!Array.isArray(pkg))
-    throw 'expected array of packages';
+   if (pkg === null || pkg === undefined) {
+     throw 'package needed!'; 
+   }
    pkg.forEach(function(pkg_str) {
       if (typeof pkg_str !== 'string') {
         throw 'Wrong items type..expected an array of type string'
