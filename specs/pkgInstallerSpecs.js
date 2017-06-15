@@ -7,7 +7,8 @@ describe('Package Installer Test Suite', function() {
     it('return string output', function() {
     expect(new PackageInstaller(['a:b','c:d']).build()).toEqual(jasmine.any(String));
   });
-
+  
+  //Teest cases that passes
   describe('passes with:', function() {
    	it('A single valid package', function() {
    	  var pkg = ['x:']; 
@@ -31,6 +32,7 @@ describe('Package Installer Test Suite', function() {
     });
   });
 
+   // Test cases that should fail
    describe('fails with:', function() {
      it('A string', function() {
      	expect(function() {
