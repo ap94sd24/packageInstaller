@@ -1,21 +1,25 @@
-var PackageInstaller = function (pkg) {
+ var PackageInstaller = function (pkg) {
   'use strict'
 
-   var _pkg = pkg;   
+    
+  if (pkg === null || pkg === undefined) {
+    throw 'package needed!'; 
+  }
 
-  
-   pkg.forEach(function(val) {
-      if (typeof val !== 'string') {
+   if (!Array.isArray(pkg))
+    throw 'expected array of packages';
+   pkg.forEach(function(pkg_str) {
+      if (typeof pkg_str !== 'string') {
         throw 'Wrong items type..expected an array of type string'
       }
    });
-   if (!Array.isArray(pkg))
-    throw 'expected array of packages';
+    
+  var _pkg = pkg;  
     
     /**
-   * Topological sorting algorithm
-   * @param parsed packages
-   * @returns sorted array
+   * Function: Topologically sort parsed package objects
+   * Inputs: parsed packages
+   * Outputs: sorted array
    */
   var topologicalSort = function(parsePkgToObj) {
     let ordered = {};
@@ -47,17 +51,24 @@ var PackageInstaller = function (pkg) {
   }
       
   /**
-   * Function parses array into array of objects and 
+   * Function: parses array into array of objects and 
    * returns comma separated strings
    */
   var parsePkgToObj = function() {
     let output = {};
     _pkg.forEach(function(pkg_str) {
       let tokens = pkg_str.split(':');
+      if (tokens.length !== 2) {
+        throw 'unexpected input! --> expected x:y'; 
+      }
        
 
       let pkg_val = tokens[0].trim();
       let dependency = tokens[1].trim();
+
+      if(pkg_val === 0) {
+        throw 'unexpected package length! --> expected a package';
+      }
 
        
       if (!output[pkg_val]) {

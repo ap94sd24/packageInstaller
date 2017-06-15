@@ -4,6 +4,9 @@ describe('Package Installer Test Suite', function() {
     expect(typeof PackageInstaller).toBe('function');
   });
 
+    it('return string output', function() {
+    expect(new PackageInstaller(['a:b','c:d']).build()).toEqual(jasmine.any(String));
+  });
 
   describe('passes with:', function() {
    	it('A single valid package', function() {
@@ -41,8 +44,12 @@ describe('Package Installer Test Suite', function() {
     it('An object', function() {
       expect(function() { new PackageInstaller({ x:'y' }); }).toThrow();
     });
+     it('A boolean value', function() {
+     	expect(function() {
+     	  new PackageInstaller(true); }).toThrow(); 
+     });
 
-    it('null package', function() {
+    it('undefined package', function() {
       expect(function() {
       	new PackageInstaller(); }).toThrow(); 
     });  
@@ -60,6 +67,19 @@ describe('Package Installer Test Suite', function() {
       	pkgInstaller.build();
       }).toThrow('contains one or more cycles'); 	
     });
-      
+
+     it('Unexpected inputs - incorrectly formatted strings', function() {
+      expect(function() {
+      	var pkgInstaller = PackageInstaller(['x: y: z' ]);
+      	pkgInstaller.build();
+      }).toThrow('unexpected input! --> expected x:y'); 	
+    });
+
+     it('Unexpected inputs - expect a package', function() {
+      expect(function() {
+      	var pkgInstaller = PackageInstaller(['']);
+      	pkgInstaller.build();
+      }).toThrow(); 	
+    });
   });
 });
