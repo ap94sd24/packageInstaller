@@ -53,6 +53,13 @@ describe('Package Installer Test Suite', function() {
       	pkgInstaller.build();
       }).toThrow('contains one or more cycles'); 	
     });
+
+    it('Contains multiple cycles', function() {
+      expect(function() {
+      	var pkgInstaller = PackageInstaller(['b:a', 'c:b','c:a','a:b']);
+      	pkgInstaller.build();
+      }).toThrow('contains one or more cycles'); 	
+    });
       
   });
 });

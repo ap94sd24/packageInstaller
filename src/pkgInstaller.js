@@ -12,16 +12,14 @@ var PackageInstaller = function (pkg) {
    if (!Array.isArray(pkg))
     throw 'expected array of packages';
     
-
-
     /**
    * Topological sorting algorithm
    * @param parsed packages
    * @returns sorted array
    */
   var topologicalSort = function(parsePkgToObj) {
-    var ordered = {};
-    var output = [];
+    let ordered = {};
+    let output = [];
      
 
     Object.keys(parsePkgToObj).forEach(function(parsedPkg) {
@@ -33,9 +31,11 @@ var PackageInstaller = function (pkg) {
         return;
       }
       parents.push(parsedPkg);
-      var pkg_val = parsePkgToObj[parsedPkg];
+      let pkg_val = parsePkgToObj[parsedPkg];
       pkg_val.forEach(function(dependency) {
-        
+        if(parents.indexOf(dependency) >= 0) {
+          throw 'contains one or more cycles'; 
+        }
         
         sortPkg(dependency, parents);
       });
@@ -51,13 +51,13 @@ var PackageInstaller = function (pkg) {
    * returns comma separated strings
    */
   var parsePkgToObj = function() {
-    var output = {};
+    let output = {};
     _pkg.forEach(function(pkg_str) {
-      var tokens = pkg_str.split(':');
+      let tokens = pkg_str.split(':');
        
 
-      var pkg_val = tokens[0].trim();
-      var dependency = tokens[1].trim();
+      let pkg_val = tokens[0].trim();
+      let dependency = tokens[1].trim();
 
        
       if (!output[pkg_val]) {
@@ -72,8 +72,6 @@ var PackageInstaller = function (pkg) {
     });
     return output;
   }
-
- 
 
   return {
     pkg: _pkg,
