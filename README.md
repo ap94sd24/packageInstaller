@@ -2,7 +2,7 @@
 By: Ying (Adam) Pan
 
 ## Program Details:
- Makes use of topological sort. It takes in an array of packages then uses a dictionary to determine order through topological sort. 
+ Makes use of topological sort. It takes in an array of packages then uses a dictionary to determine order through topological sort. Note: program make use of ES6 syntaxes.
 
  ## Exercise Information
  [Package Installer Exercise](/Coding_Exercise-San_Diego)
